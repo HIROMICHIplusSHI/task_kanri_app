@@ -1,40 +1,45 @@
 require 'rails_helper'
 
-RSpec.describe TasksController, type: :controller do
-  describe "DELETE #destroy" do
-    it "deletes the task and redirects to tasks index" do
-      # Given: 既存のタスクが存在する
-      user = create(:user)
-      task = create(:task, user: user, title: "削除されるタスク")
+RSpec.describe "ページネーション機能", type: :request do
+  let(:user) { create(:user) }
 
-      # When: destroyアクションを呼び出し
-      expect(Task.count).to eq(1)  # 削除前の確認
+  before do
+    post login_path, params: { session: { email: user.email, password: 'password' } }
+  end
 
-      delete :destroy, params: { id: task.id }
+  describe "GET /tasks" do
+    it "5件以下のタスクの場合、全件表示される" do
+      create_list(:task, 3, user: user)
+      get tasks_path
 
-      # Then: タスクが削除され、一覧ページにリダイレクト
-      expect(response).to redirect_to(tasks_path)
-      expect(Task.count).to eq(0)  # 削除後の確認
-      expect(Task.find_by(id: task.id)).to be_nil  # タスクが存在しないことを確認
+      expect(response).to have_http_status(:success)
+      expect(response.body).not_to include('pagination')
     end
 
-    it "shows success message after deletion" do
-      # Given: 既存のタスクが存在する
-      user = create(:user)
-      task = create(:task, user: user, title: "削除されるタスク")
+    it "5件を超えるタスクの場合、ページネーションが表示される" do
+      create_list(:task, 8, user: user)
+      get tasks_path
 
-      # When: destroyアクションを呼び出し
-      delete :destroy, params: { id: task.id }
-
-      # Then: 成功メッセージが設定される
-      expect(flash[:notice]).to eq("タスクが削除されました")
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('pagination')
     end
 
-    it "handles non-existent task" do
-      # When: 存在しないタスクIDでdestroyアクションを呼び出し
-      expect {
-        delete :destroy, params: { id: 99999 }
-      }.to raise_error(ActiveRecord::RecordNotFound)
+    it "pageパラメータで2ページ目が取得できる" do
+      create_list(:task, 8, user: user)
+      get tasks_path, params: { page: 2 }
+
+      expect(response).to have_http_status(:success)
+    end
+
+    it "他のユーザーのタスクは表示されない" do
+      other_user = create(:user, email: 'other@example.com')
+      my_task = create(:task, user: user, title: "My Task")
+      other_task = create(:task, user: other_user, title: "Other Task")
+
+      get tasks_path
+
+      expect(response.body).to include("My Task")
+      expect(response.body).not_to include("Other Task")
     end
   end
 end

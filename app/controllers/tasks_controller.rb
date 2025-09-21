@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :check_owner, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   def show

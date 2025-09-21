@@ -6,6 +6,9 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'database_cleaner'
 
+# Load support files
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e

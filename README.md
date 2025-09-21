@@ -80,7 +80,15 @@ docker-compose run --rm web bin/rails db:prepare
 
 # シードデータの投入（オプション）
 docker-compose run --rm web bin/rails db:seed
+
+# ⚡ 推奨: 開発環境の自動セットアップ
+docker-compose exec web bundle exec rake dev:setup
 ```
+
+### 💡 ログイン後の使用
+初回セットアップ後、以下の情報でログインできます：
+- **Email**: test@example.com
+- **Password**: password
 
 ### 4. アプリケーション起動
 ```bash
@@ -145,6 +153,32 @@ docker-compose exec web bin/rails generate migration MigrationName
 # 停止と片付け
 docker-compose down
 ```
+
+## ⚠️ よくある問題と解決法
+
+### ログインできない場合
+**症状**: 「認証に失敗しました」と表示される
+**原因**: Dockerコンテナ再起動によりユーザーデータが初期化された
+**解決法**:
+```bash
+# ユーザーデータの確認
+docker-compose exec web bundle exec rails console -e development
+> User.count
+
+# ユーザーが0の場合、シード実行
+docker-compose exec web bundle exec rake db:seed
+
+# または開発環境セットアップ
+docker-compose exec web bundle exec rake dev:setup
+```
+
+### 開発中のデータ消失について
+このアプリケーションでは、以下の場合にユーザーデータが初期化されます：
+- `docker-compose down/up` の実行
+- Dockerコンテナの再起動
+- システムの再起動
+
+**対策**: 定期的に `rake dev:setup` を実行してユーザーデータを確認してください。
 
 ## 🤖 開発支援
 

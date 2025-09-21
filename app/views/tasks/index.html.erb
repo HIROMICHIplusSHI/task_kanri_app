@@ -31,6 +31,11 @@
           </div>
         </div>
       <% end %>
+
+      <!-- ページネーション -->
+      <div class="pagination-wrapper" style="text-align: center; margin-top: 30px;">
+        <%= will_paginate @tasks, class: 'pagination' %>
+      </div>
     <% else %>
       <div class="empty-state" style="text-align: center; padding: 50px;">
         <h3>タスクがまだありません</h3>
