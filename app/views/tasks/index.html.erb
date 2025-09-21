@@ -2,12 +2,12 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-8 col-xs-12">
       <h1>タスク一覧</h1>
     </div>
     <% if @tasks&.any? %>
-      <div class="col-md-4">
-        <%= link_to "新規タスク作成", new_task_path, class: "btn btn-primary btn-lg" %>
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <%= link_to "新規タスク作成", new_task_path, class: "btn btn-primary btn-lg btn-responsive" %>
       </div>
     <% end %>
   </div>
@@ -18,16 +18,45 @@
         <div class="task-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px;">
           <h3><%= link_to task.title, task_path(task), style: "text-decoration: none;" %></h3>
           <p><%= task.description %></p>
-          <p>
-            <strong>ステータス:</strong> <%= task.status %> |
-            <strong>優先度:</strong> <%= task.priority %> |
-            <strong>期限:</strong> <%= task.due_date&.strftime("%Y/%m/%d") %>
-          </p>
+          <div class="task-meta">
+            <p class="hidden-xs">
+              <strong>ステータス:</strong>
+              <span class="status-badge status-<%= task.status == '新規' ? 'new' : task.status == '進行中' ? 'progress' : 'completed' %>">
+                <%= task.status %>
+              </span> |
+              <strong>優先度:</strong>
+              <span class="priority-badge priority-<%= task.priority == '高' ? 'high' : task.priority == '中' ? 'medium' : 'low' %>">
+                <%= task.priority %>
+              </span> |
+              <strong>期限:</strong> <%= task.due_date&.strftime("%Y/%m/%d") %>
+            </p>
+            <!-- モバイル用のコンパクト表示 -->
+            <div class="visible-xs">
+              <p><strong>ステータス:</strong>
+                <span class="status-badge status-<%= task.status == '新規' ? 'new' : task.status == '進行中' ? 'progress' : 'completed' %>">
+                  <%= task.status %>
+                </span>
+              </p>
+              <p><strong>優先度:</strong>
+                <span class="priority-badge priority-<%= task.priority == '高' ? 'high' : task.priority == '中' ? 'medium' : 'low' %>">
+                  <%= task.priority %>
+                </span>
+              </p>
+              <p><strong>期限:</strong> <%= task.due_date&.strftime("%Y/%m/%d") %></p>
+            </div>
+          </div>
           <div class="task-actions">
             <%= link_to "詳細", task_path(task), class: "btn btn-info btn-sm" %>
             <%= link_to "編集", edit_task_path(task), class: "btn btn-warning btn-sm" %>
-            <%= link_to "削除", task_path(task), method: :delete,
-                data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+            <div class="hidden-xs" style="display: inline;">
+              <%= link_to "削除", task_path(task), method: :delete,
+                  data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+            </div>
+            <!-- モバイル用削除ボタン（アイコン） -->
+            <div class="visible-xs" style="display: inline;">
+              <%= link_to "×", task_path(task), method: :delete,
+                  data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm", title: "削除" %>
+            </div>
           </div>
         </div>
       <% end %>
