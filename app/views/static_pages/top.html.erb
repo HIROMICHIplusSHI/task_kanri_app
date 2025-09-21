@@ -4,30 +4,40 @@
     <div class="col-md-6">
       <h1 class="task-app-title">TaskApp</h1>
       <p class="task-app-description">TaskAppは簡易ToDo管理ツールです。</p>
-      <p class="first-time-guide">↓↓初めてのご利用↓↓</p>
-      <%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-primary account-create-btn" %>
+
+      <% if logged_in? %>
+        <p class="welcome-message">ようこそ、<%= current_user.name %>さん！</p>
+        <%= link_to "タスク一覧", tasks_path, class: "btn btn-lg btn-primary" %>
+        <%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-lg btn-secondary" %>
+      <% else %>
+        <p class="first-time-guide">↓↓初めてのご利用↓↓</p>
+        <%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-primary account-create-btn" %>
+      <% end %>
     </div>
-    <div class="col-md-6">
-      <div class="login-form-container">
-        <h3>ログイン</h3>
-        <%= form_with(scope: :session, url: login_path, local: true, class: "login-form") do |f| %>
-          <div class="form-group">
-            <%= f.label :email, "メールアドレス" %>
-            <%= f.email_field :email, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :password, "パスワード" %>
-            <%= f.password_field :password, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :remember_me do %>
-              <%= f.check_box :remember_me %>
-              ログイン状態を保持する
-            <% end %>
-          </div>
-          <%= f.submit "ログイン", class: "btn btn-primary login-btn" %>
-        <% end %>
+
+    <% unless logged_in? %>
+      <div class="col-md-6">
+        <div class="login-form-container">
+          <h3>ログイン</h3>
+          <%= form_with(scope: :session, url: login_path, local: true, class: "login-form") do |f| %>
+            <div class="form-group">
+              <%= f.label :email, "メールアドレス" %>
+              <%= f.email_field :email, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password, "パスワード" %>
+              <%= f.password_field :password, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :remember_me do %>
+                <%= f.check_box :remember_me %>
+                ログイン状態を保持する
+              <% end %>
+            </div>
+            <%= f.submit "ログイン", class: "btn btn-primary login-btn" %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

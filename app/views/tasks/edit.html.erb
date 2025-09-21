@@ -6,8 +6,7 @@
   <%= form_with(model: @task, local: true) do |form| %>
     <%= render 'shared/error_messages', object: @task %>
 
-    <!-- ユーザーIDは保持（編集時は変更不可） -->
-    <%= form.hidden_field :user_id %>
+    <!-- ユーザーIDは自動的に保持される -->
 
     <div class="form-group">
       <%= form.label :title, "タイトル" %>

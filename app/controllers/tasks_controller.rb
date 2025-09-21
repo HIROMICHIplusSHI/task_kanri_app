@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
+  before_action :find_task, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:show, :edit, :update, :destroy]
+
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
   end
 
   def show
-    @task = Task.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   def new
@@ -14,7 +14,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     if @task.save
       redirect_to @task, notice: 'タスクが作成されました'
@@ -24,34 +24,36 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   def update
-    @task = Task.find(params[:id])
-
     if @task.update(task_params)
       redirect_to @task, notice: 'タスクが更新されました'
     else
       render :edit
     end
-  rescue ActiveRecord::RecordNotFound
-    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
     redirect_to tasks_path, notice: 'タスクが削除されました'
-  rescue ActiveRecord::RecordNotFound
-    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   private
 
+  def find_task
+    @task = Task.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render file: "#{Rails.root}/public/404.html", status: 404
+  end
+
+  def check_owner
+    unless @task&.user == current_user
+      render file: "#{Rails.root}/public/403.html", status: 403
+    end
+  end
+
   def task_params
-    params.require(:task).permit(:title, :description, :status, :priority, :due_date, :user_id)
+    params.require(:task).permit(:title, :description, :status, :priority, :due_date)
   end
 end
