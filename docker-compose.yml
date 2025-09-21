@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: myapp_development
+      MYSQL_USER: myapp
+      MYSQL_PASSWORD: myapp_pass
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3395:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "db", "-ppassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: [task_network]
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    volumes:
+      - .:/myapp
+    ports:
+      - "3120:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
+    environment:
+      RAILS_ENV: development
+      DISABLE_BOOTSNAP: "1" # ← 正しい無効化フラグ
+      DISABLE_SPRING: "1"
+      RAILS_SERVE_STATIC_FILES: "true"
+      RAILS_LOG_TO_STDOUT: "true"
+    networks: [task_network]
+
+volumes:
+  mysql_data:
+
+networks:
+  task_network:
+    driver: bridge

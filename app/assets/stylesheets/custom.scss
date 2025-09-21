@@ -1,0 +1,204 @@
+/* custom.scss */
+
+@import 'bootstrap';
+
+$modal-content-bg: #fff; // デフォルト上書き
+$modal-backdrop-bg: #000;
+$modal-backdrop-opacity: 0.6;
+
+/* 共通 */
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* タイポグラフィ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+}
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* ヘッダー */
+.navbar-inverse {
+  background-color: #d9534f;
+  border-color: #d9534f;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  font-style: italic;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+#logo:hover {
+  color: #ccc;
+  text-decoration: none;
+}
+
+/* ナビゲーションリンク */
+.navbar-nav li a {
+  font-weight: bold !important;
+  color: #fff !important;
+}
+
+.navbar-nav li a:hover {
+  color: #ccc !important;
+  background-color: transparent !important;
+}
+
+/* ドロップダウンメニュー */
+.dropdown-menu li a {
+  color: #000 !important;
+  font-weight: normal !important;
+}
+
+/* ドロップダウンボタン（ユーザー名）の背景色 */
+.dropdown.open .dropdown-toggle {
+  background-color: #d9534f !important;
+}
+
+/* ドロップダウンメニューホバー時 */
+.dropdown-menu li a:hover {
+  color: #000 !important;
+  background-color: #f5f5f5 !important;
+}
+
+/* トップページのTask Appタイトル */
+.task-app-title {
+  font-style: italic;
+  font-size: 4em;
+  font-weight: bold;
+  color: #d9534f;
+  margin-bottom: 20px;
+}
+
+/* Task App説明文 */
+.task-app-description {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* 初回利用ガイド */
+.first-time-guide {
+  font-size: 1em;
+  color: #666;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* アカウント作成ボタン */
+.account-create-btn {
+  background-color: #d9534f;
+  border-color: #d9534f;
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+}
+
+/* ログインフォーム */
+.login-form-container {
+  background-color: #f0f0f0;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.login-form-container h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.login-btn {
+  background-color: #d9534f;
+  border-color: #d9534f;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+/* トップページjumbotronの背景色を削除 */
+.jumbotron {
+  background-color: transparent;
+}
+
+// .dropdown-menu li a:hover {
+//   color: #000 !important;
+// }
+
+// /* ドロップダウンヘッダー */
+// .dropdown-menu .dropdown-header {
+//   background-color: #eaeaea;
+//   color: #605e5e;
+//   font-weight: normal;
+// }
+
+/* デバッグウインドウ */
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  box-sizing: border-box;
+}
+
+/* エラーメッセージ */
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  .form-control {
+    color: $brand-danger;
+  }
+}
