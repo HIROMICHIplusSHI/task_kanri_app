@@ -44,4 +44,5 @@ RSpec.configure do |config|
 end
 
 # Capybara configuration
-Capybara.app_host = 'http://localhost:3000'
+# DON'T set app_host - let Capybara use the test app directly
+# Capybara.app_host = 'http://localhost:3000'  # This would hit development DB!

@@ -31,3 +31,52 @@
 
 en:
   hello: "Hello world"
+
+  app:
+    title: "Task Management App"
+    welcome_message: "Welcome, %{name}!"
+    task_list: "Task List"
+    new_task: "New Task"
+    edit_task: "Edit Task"
+    logout: "Logout"
+    login: "Login"
+    signup: "Sign Up"
+    home: "Home"
+
+  tasks:
+    title: "Title"
+    description: "Description"
+    status: "Status"
+    priority: "Priority"
+    due_date: "Due Date"
+    created_at: "Created"
+    actions: "Actions"
+    show: "View"
+    edit: "Edit"
+    delete: "Delete"
+    create_task: "Create Task"
+    update_task: "Update Task"
+    no_tasks: "No tasks found"
+    task_created: "Task was successfully created"
+    task_updated: "Task was successfully updated"
+    task_deleted: "Task was successfully deleted"
+
+  status:
+    new: "New"
+    in_progress: "In Progress"
+    completed: "Completed"
+
+  priority:
+    low: "Low"
+    medium: "Medium"
+    high: "High"
+
+  language:
+    japanese: "日本語"
+    english: "English"
+
+  activerecord:
+    errors:
+      messages:
+        blank: "can't be blank"
+        too_long: "is too long (maximum is %{count} characters)"

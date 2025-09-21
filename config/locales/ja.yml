@@ -1,4 +1,47 @@
 ja:
+  app:
+    title: "タスク管理アプリ"
+    welcome_message: "ようこそ、%{name}さん！"
+    task_list: "タスク一覧"
+    new_task: "新規タスク"
+    edit_task: "タスク編集"
+    logout: "ログアウト"
+    login: "ログイン"
+    signup: "アカウント作成"
+    home: "ホーム"
+
+  tasks:
+    title: "タイトル"
+    description: "説明"
+    status: "ステータス"
+    priority: "優先度"
+    due_date: "期限"
+    created_at: "作成日時"
+    actions: "アクション"
+    show: "詳細"
+    edit: "編集"
+    delete: "削除"
+    create_task: "タスクを作成"
+    update_task: "タスクを更新"
+    no_tasks: "タスクが見つかりません"
+    task_created: "タスクが作成されました"
+    task_updated: "タスクが更新されました"
+    task_deleted: "タスクが削除されました"
+
+  status:
+    new: "新規"
+    in_progress: "進行中"
+    completed: "完了"
+
+  priority:
+    low: "低"
+    medium: "中"
+    high: "高"
+
+  language:
+    japanese: "日本語"
+    english: "English"
+
   activerecord:
     errors:
       messages:
