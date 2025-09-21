@@ -11,7 +11,7 @@
   </div>
 
   <div class="tasks-list">
-    <% if @tasks.any? %>
+    <% if @tasks&.any? %>
       <% @tasks.each do |task| %>
         <div class="task-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px;">
           <h3><%= link_to task.title, task_path(task), style: "text-decoration: none;" %></h3>
