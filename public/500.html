@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <title>サーバーエラーが発生しました (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   .rails-default-error-page {
@@ -51,6 +51,20 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 20px 10px;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+  }
   </style>
 </head>
 
@@ -58,9 +72,13 @@
   <!-- This file lives in public/500.html -->
   <div class="dialog">
     <div>
-      <h1>We're sorry, but something went wrong.</h1>
+      <h1>サーバーエラーが発生しました</h1>
+      <p>申し訳ございませんが、サーバーで問題が発生しました。しばらく時間をおいてから再度お試しください。</p>
+      <p>
+        <a href="/" class="btn">ホームページに戻る</a>
+        <a href="/tasks" class="btn">タスク一覧に戻る</a>
+      </p>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
 </body>
 </html>

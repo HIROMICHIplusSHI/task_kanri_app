@@ -5,6 +5,8 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   def new
@@ -23,6 +25,8 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   def update
@@ -33,12 +37,16 @@ class TasksController < ApplicationController
     else
       render :edit
     end
+  rescue ActiveRecord::RecordNotFound
+    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
     redirect_to tasks_path, notice: 'タスクが削除されました'
+  rescue ActiveRecord::RecordNotFound
+    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   private
