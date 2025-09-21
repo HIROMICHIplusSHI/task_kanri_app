@@ -1,6 +1,6 @@
 ja:
   app:
-    title: "タスク管理アプリ"
+    title: "TaskApp"
     welcome_message: "ようこそ、%{name}さん！"
     task_list: "タスク一覧"
     new_task: "新規タスク"
@@ -38,9 +38,6 @@ ja:
     medium: "中"
     high: "高"
 
-  language:
-    japanese: "日本語"
-    english: "English"
 
   activerecord:
     errors:
