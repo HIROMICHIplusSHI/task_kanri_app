@@ -5,9 +5,11 @@
     <div class="col-md-8">
       <h1>タスク一覧</h1>
     </div>
-    <div class="col-md-4">
-      <%= link_to "新規タスク作成", new_task_path, class: "btn btn-primary btn-lg" %>
-    </div>
+    <% if @tasks&.any? %>
+      <div class="col-md-4">
+        <%= link_to "新規タスク作成", new_task_path, class: "btn btn-primary btn-lg" %>
+      </div>
+    <% end %>
   </div>
 
   <div class="tasks-list">
