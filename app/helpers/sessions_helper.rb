@@ -41,4 +41,13 @@ module SessionsHelper
   def current_user?(user)
     user && user == current_user
   end
+
+  def admin_only
+    current_user&.admin? || false
+  end
+
+  def owner_or_admin?(user)
+    return false unless current_user
+    current_user.admin? || current_user?(user)
+  end
 end
