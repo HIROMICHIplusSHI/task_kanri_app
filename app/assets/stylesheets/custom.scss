@@ -137,10 +137,70 @@ p {
 .account-create-btn {
   background-color: $primary-color;
   border-color: $primary-color;
-  display: block;
-  width: 200px;
-  margin: 0 auto;
+}
 
+/* ユーザー詳細ページ用スタイル */
+.stat-item {
+  padding: 10px 0;
+}
+
+.stat-number {
+  font-size: 2em;
+  font-weight: bold;
+  color: $primary-color;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 5px;
+}
+
+.progress-item {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.progress-item:last-child {
+  border-bottom: none;
+}
+
+.task-item {
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fafafa;
+  transition: background-color 0.2s;
+}
+
+.task-item:hover {
+  background-color: #f0f8ff;
+}
+
+.task-header {
+  margin-bottom: 10px;
+}
+
+.task-title-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.task-title-link:hover {
+  color: $primary-color;
+  text-decoration: none;
+}
+
+.task-description {
+  margin: 10px 0 0 0;
+  color: #666;
+  line-height: 1.4;
+}
+
+.account-create-btn {
   &:hover {
     background-color: darken($primary-color, 10%);
     border-color: darken($primary-color, 10%);

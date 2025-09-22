@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @tasks = @user.tasks.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    @task_stats = calculate_task_stats(@user)
   end
 
   def new
@@ -46,5 +48,25 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
+    end
+
+    def calculate_task_stats(user)
+      tasks = user.tasks
+      total = tasks.count
+      return { total: 0, completed: 0, completion_rate: 0, status_breakdown: {} } if total == 0
+
+      completed = tasks.where(status: "完了").count
+      completion_rate = ((completed.to_f / total) * 100).round(1)
+
+      status_breakdown = tasks.group(:status).count
+      priority_breakdown = tasks.group(:priority).count
+
+      {
+        total: total,
+        completed: completed,
+        completion_rate: completion_rate,
+        status_breakdown: status_breakdown,
+        priority_breakdown: priority_breakdown
+      }
     end
 end
