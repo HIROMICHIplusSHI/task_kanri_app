@@ -50,4 +50,9 @@ module SessionsHelper
     return false unless current_user
     current_user.admin? || current_user?(user)
   end
+
+  def owner_only?(user)
+    return false unless current_user
+    current_user?(user)
+  end
 end

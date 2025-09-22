@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
   before_action :admin_required, only: [:index, :destroy]
+  before_action :owner_or_admin_required, only: [:show]
+  before_action :owner_only_required, only: [:edit, :update]
 
   def index
     @users = User.all.paginate(page: params[:page], per_page: 20)
@@ -29,12 +31,10 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user) || current_user.admin?
   end
 
   def update
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user) || current_user.admin?
 
     if @user.update(user_params)
       flash[:success] = "プロフィールが更新されました"
@@ -74,6 +74,22 @@ class UsersController < ApplicationController
 
     def admin_required
       unless admin_only
+        flash[:error] = "アクセス権限がありません"
+        redirect_to root_path
+      end
+    end
+
+    def owner_or_admin_required
+      @user = User.find(params[:id])
+      unless owner_or_admin?(@user)
+        flash[:error] = "アクセス権限がありません"
+        redirect_to root_path
+      end
+    end
+
+    def owner_only_required
+      @user = User.find(params[:id])
+      unless owner_only?(@user)
         flash[:error] = "アクセス権限がありません"
         redirect_to root_path
       end
