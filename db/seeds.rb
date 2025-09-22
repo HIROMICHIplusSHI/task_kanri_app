@@ -8,4 +8,5 @@ User.create!( name: "Sample User",
 User.create!( name: "制作ユーザー",
               email: "seisaku@email.com",
               password: "password",
-              password_confirmation: "password")
+              password_confirmation: "password",
+              admin: true)
