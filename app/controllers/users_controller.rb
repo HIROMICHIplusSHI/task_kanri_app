@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
-  
+  before_action :admin_required, only: [:index, :destroy]
+
+  def index
+    @users = User.all.paginate(page: params[:page], per_page: 20)
+  end
+
   def show
     @user = User.find(params[:id])
     @tasks = @user.tasks.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
@@ -38,9 +43,26 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  
+
+  def destroy
+    @user = User.find(params[:id])
+
+    if @user == current_user
+      flash[:error] = "自分自身は削除できません"
+      redirect_to users_path
+      return
+    end
+
+    if @user.destroy
+      flash[:success] = "#{@user.name}が削除されました"
+    else
+      flash[:error] = "削除に失敗しました"
+    end
+    redirect_to users_path
+  end
+
   private
-  
+
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
@@ -48,6 +70,13 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
+    end
+
+    def admin_required
+      unless admin_only
+        flash[:error] = "アクセス権限がありません"
+        redirect_to root_path
+      end
     end
 
     def calculate_task_stats(user)

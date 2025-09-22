@@ -1,0 +1,61 @@
+<% provide(:title, "ユーザー一覧") %>
+
+<div class="container">
+  <h2>ユーザー一覧</h2>
+
+  <!-- ページネーション（上部） -->
+  <div class="text-center" style="margin-bottom: 20px;">
+    <%= will_paginate @users %>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>メールアドレス</th>
+          <th>権限</th>
+          <th>登録日</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= link_to user.name, user_path(user) %>
+            </td>
+            <td><%= user.email %></td>
+            <td>
+              <% if user.admin? %>
+                <span class="badge badge-danger">管理者</span>
+              <% else %>
+                <span class="badge badge-info">一般ユーザー</span>
+              <% end %>
+            </td>
+            <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
+            <td style="white-space: nowrap;">
+              <%= link_to "詳細", user_path(user), class: "btn btn-primary btn-xs" %>
+              <% unless user == current_user %>
+                <%= link_to "削除", user_path(user),
+                           method: :delete,
+                           data: { confirm: "【危険操作】ユーザー「#{user.name}」とその関連データ（タスクなど）が完全に削除されます。\n\nこの操作は取り消せません。\n\n本当に削除してもよろしいですか？" },
+                           class: "btn btn-danger btn-xs",
+                           style: "font-weight: bold; margin-left: 5px;" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ページネーション（下部） -->
+  <div class="text-center">
+    <%= will_paginate @users %>
+  </div>
+
+  <div class="text-center" style="margin-top: 20px;">
+    <%= link_to "タスク一覧に戻る", tasks_path, class: "btn btn-default" %>
+  </div>
+</div>
