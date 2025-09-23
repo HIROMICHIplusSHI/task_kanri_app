@@ -22,7 +22,7 @@
       <% @tasks.each do |task| %>
         <div class="task-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px;">
           <h3><%= link_to task.title, task_path(task), style: "text-decoration: none;" %></h3>
-          <p><%= task.description %></p>
+          <p><%= auto_link_urls(task.description) %></p>
           <div class="task-meta">
             <!-- デスクトップ用 - ステータス行とボタンを横並び -->
             <div class="hidden-xs" style="display: flex; justify-content: space-between; align-items: center;">
@@ -41,7 +41,7 @@
                 <%= link_to "詳細", task_path(task), class: "btn btn-info btn-sm" %>
                 <%= link_to "編集", edit_task_path(task), class: "btn btn-warning btn-sm" %>
                 <%= link_to "削除", task_path(task), method: :delete,
-                    data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+                    data: { confirm: "【#{task.title}】を完全に削除します。\n\nこの操作は取り消せません。\n\n本当に削除してもよろしいですか？" }, class: "btn btn-danger btn-sm" %>
               </div>
             </div>
 

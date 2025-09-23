@@ -9,7 +9,7 @@
         <tbody>
           <tr>
             <th width="20%" class="task-detail-label">説明</th>
-            <td class="task-detail-content"><%= simple_format(@task.description) %></td>
+            <td class="task-detail-content"><%= auto_link_urls(@task.description) %></td>
           </tr>
           <tr>
             <th class="task-detail-label">ステータス</th>
@@ -48,7 +48,7 @@
     <div class="actions text-center" style="margin-top: 30px;">
       <%= link_to "編集", edit_task_path(@task), class: "btn btn-primary" %>
       <%= link_to "削除", task_path(@task), method: :delete,
-          data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+          data: { confirm: "【#{@task.title}】を完全に削除します。\n\nこの操作は取り消せません。\n\n本当に削除してもよろしいですか？" }, class: "btn btn-danger" %>
       <%= link_to "一覧に戻る", tasks_path, class: "btn btn-secondary" %>
     </div>
   </div>

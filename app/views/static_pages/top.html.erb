@@ -8,8 +8,10 @@
       <p class="task-app-description">TaskAppは簡易ToDo管理ツールです。</p>
 
       <% unless logged_in? %>
-        <p class="first-time-guide">↓↓初めてのご利用↓↓</p>
-        <%= link_to t('app.signup'), signup_path, class: "btn btn-lg btn-primary account-create-btn" %>
+        <div style="text-align: center; margin-top: 20px;">
+          <p class="first-time-guide">↓↓初めてのご利用↓↓</p>
+          <%= link_to t('app.signup'), signup_path, class: "btn btn-lg btn-primary account-create-btn" %>
+        </div>
       <% end %>
     </div>
 

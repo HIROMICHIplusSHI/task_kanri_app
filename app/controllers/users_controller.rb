@@ -15,7 +15,12 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    if logged_in?
+      flash[:info] = "すでにログインしています。"
+      redirect_to current_user
+    else
+      @user = User.new
+    end
   end
   
   def create
@@ -49,6 +54,12 @@ class UsersController < ApplicationController
 
     if @user == current_user
       flash[:error] = "自分自身は削除できません"
+      redirect_to users_path
+      return
+    end
+
+    if @user.admin?
+      flash[:error] = "管理者ユーザーは削除できません"
       redirect_to users_path
       return
     end

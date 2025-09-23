@@ -36,7 +36,7 @@
             <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
             <td style="white-space: nowrap;">
               <%= link_to "詳細", user_path(user), class: "btn btn-primary btn-xs" %>
-              <% unless user == current_user %>
+              <% unless user == current_user || user.admin? %>
                 <%= link_to "削除", user_path(user),
                            method: :delete,
                            data: { confirm: "【危険操作】ユーザー「#{user.name}」とその関連データ（タスクなど）が完全に削除されます。\n\nこの操作は取り消せません。\n\n本当に削除してもよろしいですか？" },

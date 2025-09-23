@@ -109,7 +109,7 @@
                   <% end %>
                 </small>
               </div>
-              <p class="task-description"><%= truncate(task.description, length: 100) %></p>
+              <p class="task-description"><%= auto_link_urls_truncated(task.description, length: 100) %></p>
             </div>
           <% end %>
 
