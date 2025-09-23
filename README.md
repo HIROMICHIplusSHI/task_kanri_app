@@ -49,9 +49,10 @@ Ruby on Rails 7.1.5.2 + MySQL + Docker 環境で開発し、認証機能、ユ�
 - **データベース**: MySQL 5.7 (永続化対応)
 - **コンテナ**: Docker / Docker Compose
 - **テスト**: RSpec, Factory Bot, Capybara
+- **コード品質**: RuboCop, rubocop-rails, rubocop-rspec
 - **フロントエンド**: Bootstrap 3.4.1, SCSS, Rails UJS
 - **ページネーション**: will_paginate gem
-- **開発手法**: Test-Driven Development (TDD)
+- **開発手法**: Test-Driven Development (TDD) + Static Code Analysis
 
 ## 🚀 クイックスタート
 
@@ -89,6 +90,12 @@ docker-compose exec web bundle exec rspec
 # 特定のテストスイート
 docker-compose exec web bundle exec rspec spec/controllers/
 docker-compose exec web bundle exec rspec spec/features/
+
+# コード品質チェック
+docker-compose exec web bundle exec rubocop
+
+# コード品質自動修正
+docker-compose exec web bundle exec rubocop --autocorrect
 ```
 
 ## 🔧 便利なコマンド
@@ -158,6 +165,10 @@ docker-compose exec web bundle exec rails assets:precompile
 
 - フラッシュメッセージ統一、URL 自動リンク化、セキュリティ強化
 
+### ✅ コード品質保証システム (完了)
+
+- RuboCop 静的解析導入、1,100+ 自動修正適用、コードスタイル統一
+
 ## 🏗️ アーキテクチャ特徴
 
 ### セキュリティ
@@ -207,15 +218,16 @@ docker-compose restart web
 
 ## 📈 プロジェクト統計
 
-- **開発期間**: 約 20 時間
-- **コミット数**: 15+ commits
+- **開発期間**: 約 22 時間
+- **コミット数**: 17+ commits
 - **テストカバレッジ**: 主要機能 100%
 - **実装機能数**: 25+ features
-- **コード品質**: TDD による高品質保証
+- **コード品質**: TDD + RuboCop による二重品質保証
+- **RuboCop**: 70ファイル、0件違反（1,100+修正適用済み）
 
 ## 🤖 開発支援
 
-このプロジェクトは [Claude Code](https://claude.ai/code) を活用して Test-Driven Development 手法で開発されました。
+このプロジェクトは [Claude Code](https://claude.ai/code) を活用して Test-Driven Development + Static Code Analysis 手法で開発されました。
 
 ---
 
