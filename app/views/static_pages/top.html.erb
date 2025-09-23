@@ -7,28 +7,34 @@
       <h1 class="task-app-title"><%= t('app.title') %></h1>
       <p class="task-app-description">TaskAppは簡易ToDo管理ツールです。</p>
 
-      <% if logged_in? %>
-        <p class="welcome-message"><%= t('app.welcome_message', name: current_user.name) %></p>
-        <%= link_to t('app.task_list'), tasks_path, class: "btn btn-lg btn-primary" %>
-        <%= link_to t('app.logout'), logout_path, method: :delete, class: "btn btn-lg btn-secondary" %>
-      <% else %>
+      <% unless logged_in? %>
         <p class="first-time-guide">↓↓初めてのご利用↓↓</p>
         <%= link_to t('app.signup'), signup_path, class: "btn btn-lg btn-primary account-create-btn" %>
       <% end %>
     </div>
 
-    <% unless logged_in? %>
-      <div class="col-md-6">
-        <div style="display: flex; justify-content: center;">
-          <div class="login-form-container" style="max-width: 350px; width: 350px;">
-            <style>
-              @media (max-width: 767px) {
-                .login-form-container {
-                  max-width: none !important;
-                  width: 100% !important;
-                }
+    <div class="col-md-6">
+      <div style="display: flex; justify-content: center;">
+        <div class="login-form-container" style="max-width: 350px; width: 350px;">
+          <style>
+            @media (max-width: 767px) {
+              .login-form-container {
+                max-width: none !important;
+                width: 100% !important;
               }
-            </style>
+            }
+          </style>
+
+          <% if logged_in? %>
+            <div style="text-align: center;">
+              <p class="welcome-message"><%= t('app.welcome_message', name: current_user.name) %></p>
+              <div style="margin-top: 20px;">
+                <%= link_to t('app.task_list'), tasks_path, class: "btn btn-lg btn-primary", style: "margin-bottom: 10px; width: 100%;" %>
+                <br>
+                <%= link_to t('app.logout'), logout_path, method: :delete, class: "btn btn-lg btn-secondary", style: "width: 100%;" %>
+              </div>
+            </div>
+          <% else %>
             <h3 style="text-align: center;"><%= t('app.login') %></h3>
             <%= form_with(scope: :session, url: login_path, local: true, class: "login-form") do |f| %>
               <div class="form-group">
@@ -47,9 +53,9 @@
               </div>
               <%= f.submit t('app.login'), class: "btn btn-primary login-btn" %>
             <% end %>
-          </div>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

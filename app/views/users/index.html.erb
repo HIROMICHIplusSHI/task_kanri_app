@@ -28,9 +28,9 @@
             <td><%= user.email %></td>
             <td>
               <% if user.admin? %>
-                <span class="badge badge-danger">管理者</span>
+                <span class="badge badge-success">管理者</span>
               <% else %>
-                <span class="badge badge-info">一般ユーザー</span>
+                <span class="badge badge-default">一般ユーザー</span>
               <% end %>
             </td>
             <td><%= user.created_at.strftime("%Y/%m/%d") %></td>

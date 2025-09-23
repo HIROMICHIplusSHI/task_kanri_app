@@ -559,6 +559,28 @@ p {
   }
 }
 
+/* selectボックスの特別なスタイリング */
+select.form-control {
+  padding: 8px 30px 8px 15px; /* 右側に矢印用のスペース */
+  line-height: 1.4;
+  height: 34px;
+  vertical-align: middle; /* 縦の配置を中央に */
+
+  /* selectボックスの見た目を統一 */
+  background-color: #fff;
+  background-image: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* カスタム矢印アイコン */
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 8px 10px;
+  padding-right: 30px; /* 矢印アイコンのスペース確保 */
+}
+
 /* カードスタイルコンテナ */
 .card-container {
   background: white;
@@ -570,19 +592,154 @@ p {
 
 /* ページネーションの改善 */
 .pagination {
+  margin: 0;
+  justify-content: center;
+
   li a, li span {
     color: $primary-color;
     border-color: #ddd;
+    padding: 10px 15px;
+    margin: 0 2px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
 
     &:hover {
       background-color: $primary-color;
       border-color: $primary-color;
       color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
     }
   }
 
   .active a, .active span {
     background-color: $primary-color;
     border-color: $primary-color;
+    color: white;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+  }
+
+  .disabled a, .disabled span {
+    color: #999;
+    border-color: #ddd;
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: #f8f9fa;
+      border-color: #ddd;
+      color: #999;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* カスタムページネーション */
+.custom-pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  @media (max-width: 767px) {
+    li a, li span {
+      padding: 8px 12px;
+      font-size: 0.9em;
+      margin: 0 1px;
+    }
+  }
+}
+
+/* ページネーションラッパー */
+.pagination-wrapper-top, .pagination-wrapper-bottom {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+  @media (max-width: 767px) {
+    padding: 10px;
+    margin: 10px 0;
+  }
+}
+
+/* タスクアクションボタンの改善 */
+.task-actions {
+  .btn {
+    margin-left: 5px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .btn {
+      margin: 2px 3px;
+    }
+  }
+}
+
+/* フォームレイアウトの改善 */
+.form-group {
+  @media (max-width: 767px) {
+    .row {
+      .col-md-4, .col-sm-4 {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+/* ユーザー権限バッジの改善 */
+.badge-success {
+  background-color: $success-color;
+  color: white;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.badge-default {
+  background-color: $secondary-color;
+  color: white;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* タスク詳細画面の改善 */
+.task-detail-table {
+  margin-bottom: 0;
+
+  .task-detail-label {
+    background-color: #f8f9fa;
+    color: $dark-text;
+    font-weight: 600;
+    padding: 12px 15px;
+    border-right: 1px solid #dee2e6;
+    vertical-align: middle;
+  }
+
+  .task-detail-content {
+    padding: 12px 15px;
+    vertical-align: middle;
+    line-height: 1.6;
+  }
+
+  tr {
+    border-bottom: 1px solid #dee2e6;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  th, td {
+    border-top: none;
   }
 }

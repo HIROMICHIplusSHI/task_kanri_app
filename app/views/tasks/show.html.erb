@@ -1,21 +1,55 @@
 <% provide(:title, @task.title) %>
 
 <div class="container">
-  <h1><%= @task.title %></h1>
+  <div class="card-container">
+    <h1 class="text-center" style="margin-bottom: 30px;"><%= @task.title %></h1>
 
-  <div class="task-details">
-    <p><strong>説明:</strong></p>
-    <p><%= @task.description %></p>
+    <div class="task-details">
+      <table class="table table-condensed task-detail-table">
+        <tbody>
+          <tr>
+            <th width="20%" class="task-detail-label">説明</th>
+            <td class="task-detail-content"><%= simple_format(@task.description) %></td>
+          </tr>
+          <tr>
+            <th class="task-detail-label">ステータス</th>
+            <td class="task-detail-content">
+              <span class="status-badge status-<%= @task.status == '新規' ? 'new' : @task.status == '進行中' ? 'progress' : 'completed' %>">
+                <%= @task.status %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th class="task-detail-label">優先度</th>
+            <td class="task-detail-content">
+              <span class="priority-badge priority-<%= @task.priority == '高' ? 'high' : @task.priority == '中' ? 'medium' : 'low' %>">
+                <%= @task.priority %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th class="task-detail-label">期限</th>
+            <td class="task-detail-content">
+              <%= @task.due_date&.strftime("%Y年%m月%d日") || "設定なし" %>
+            </td>
+          </tr>
+          <tr>
+            <th class="task-detail-label">作成日</th>
+            <td class="task-detail-content"><%= @task.created_at.strftime("%Y年%m月%d日 %H:%M") %></td>
+          </tr>
+          <tr>
+            <th class="task-detail-label">更新日</th>
+            <td class="task-detail-content"><%= @task.updated_at.strftime("%Y年%m月%d日 %H:%M") %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <p><strong>ステータス:</strong> <%= @task.status %></p>
-    <p><strong>優先度:</strong> <%= @task.priority %></p>
-    <p><strong>期限:</strong> <%= @task.due_date&.strftime("%Y年%m月%d日") %></p>
-  </div>
-
-  <div class="actions">
-    <%= link_to "編集", edit_task_path(@task), class: "btn btn-primary" %>
-    <%= link_to "削除", task_path(@task), method: :delete,
-        data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-    <%= link_to "一覧に戻る", tasks_path, class: "btn btn-secondary" %>
+    <div class="actions text-center" style="margin-top: 30px;">
+      <%= link_to "編集", edit_task_path(@task), class: "btn btn-primary" %>
+      <%= link_to "削除", task_path(@task), method: :delete,
+          data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+      <%= link_to "一覧に戻る", tasks_path, class: "btn btn-secondary" %>
+    </div>
   </div>
 </div>

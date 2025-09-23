@@ -14,22 +14,37 @@
 
   <div class="tasks-list">
     <% if @tasks&.any? %>
+      <!-- ページネーション（上部） -->
+      <div class="pagination-wrapper-top" style="text-align: center; margin-bottom: 20px; margin-top: 20px;">
+        <%= will_paginate @tasks, class: 'pagination custom-pagination' %>
+      </div>
+
       <% @tasks.each do |task| %>
         <div class="task-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px;">
           <h3><%= link_to task.title, task_path(task), style: "text-decoration: none;" %></h3>
           <p><%= task.description %></p>
           <div class="task-meta">
-            <p class="hidden-xs">
-              <strong>ステータス:</strong>
-              <span class="status-badge status-<%= task.status == '新規' ? 'new' : task.status == '進行中' ? 'progress' : 'completed' %>">
-                <%= task.status %>
-              </span> |
-              <strong>優先度:</strong>
-              <span class="priority-badge priority-<%= task.priority == '高' ? 'high' : task.priority == '中' ? 'medium' : 'low' %>">
-                <%= task.priority %>
-              </span> |
-              <strong>期限:</strong> <%= task.due_date&.strftime("%Y/%m/%d") %>
-            </p>
+            <!-- デスクトップ用 - ステータス行とボタンを横並び -->
+            <div class="hidden-xs" style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong>ステータス:</strong>
+                <span class="status-badge status-<%= task.status == '新規' ? 'new' : task.status == '進行中' ? 'progress' : 'completed' %>">
+                  <%= task.status %>
+                </span> |
+                <strong>優先度:</strong>
+                <span class="priority-badge priority-<%= task.priority == '高' ? 'high' : task.priority == '中' ? 'medium' : 'low' %>">
+                  <%= task.priority %>
+                </span> |
+                <strong>期限:</strong> <%= task.due_date&.strftime("%Y/%m/%d") %>
+              </div>
+              <div class="task-actions">
+                <%= link_to "詳細", task_path(task), class: "btn btn-info btn-sm" %>
+                <%= link_to "編集", edit_task_path(task), class: "btn btn-warning btn-sm" %>
+                <%= link_to "削除", task_path(task), method: :delete,
+                    data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+              </div>
+            </div>
+
             <!-- モバイル用のコンパクト表示 -->
             <div class="visible-xs">
               <p><strong>ステータス:</strong>
@@ -43,27 +58,20 @@
                 </span>
               </p>
               <p><strong>期限:</strong> <%= task.due_date&.strftime("%Y/%m/%d") %></p>
-            </div>
-          </div>
-          <div class="task-actions">
-            <%= link_to "詳細", task_path(task), class: "btn btn-info btn-sm" %>
-            <%= link_to "編集", edit_task_path(task), class: "btn btn-warning btn-sm" %>
-            <div class="hidden-xs" style="display: inline;">
-              <%= link_to "削除", task_path(task), method: :delete,
-                  data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
-            </div>
-            <!-- モバイル用削除ボタン（アイコン） -->
-            <div class="visible-xs" style="display: inline;">
-              <%= link_to "×", task_path(task), method: :delete,
-                  data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm", title: "削除" %>
+              <div class="task-actions" style="text-align: center; margin-top: 15px;">
+                <%= link_to "詳細", task_path(task), class: "btn btn-info btn-sm" %>
+                <%= link_to "編集", edit_task_path(task), class: "btn btn-warning btn-sm" %>
+                <%= link_to "×", task_path(task), method: :delete,
+                    data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm", title: "削除" %>
+              </div>
             </div>
           </div>
         </div>
       <% end %>
 
-      <!-- ページネーション -->
-      <div class="pagination-wrapper" style="text-align: center; margin-top: 30px;">
-        <%= will_paginate @tasks, class: 'pagination' %>
+      <!-- ページネーション（下部） -->
+      <div class="pagination-wrapper-bottom" style="text-align: center; margin-top: 30px;">
+        <%= will_paginate @tasks, class: 'pagination custom-pagination' %>
       </div>
     <% else %>
       <div class="empty-state" style="text-align: center; padding: 50px;">
