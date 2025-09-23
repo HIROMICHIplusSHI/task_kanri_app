@@ -1,0 +1,98 @@
+inherit_from: .rubocop_todo.yml
+
+# RuboCop設定ファイル
+
+AllCops:
+  # Ruby 3.0.6対応
+  TargetRubyVersion: 3.0
+
+  # Rails 7.1対応
+  TargetRailsVersion: 7.1
+
+  # 新しいCopを自動的に有効化
+  NewCops: enable
+
+  # 拡張機能の提案を無効化
+  SuggestExtensions: false
+
+  # チェック対象のファイル・ディレクトリ
+  Include:
+    - '**/*.rb'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/config.ru'
+
+  # チェック除外のファイル・ディレクトリ
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*.rb'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'bin/**/*'
+    - 'tmp/**/*'
+    - 'log/**/*'
+    - 'config/routes.rb'
+
+# プラグインの設定
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+# 行の長さ制限を緩和（Railsプロジェクトでは120文字が一般的）
+Layout/LineLength:
+  Max: 120
+  AllowURI: true
+  AllowHeredoc: true
+
+# メソッドの長さ制限を緩和
+Metrics/MethodLength:
+  Max: 15
+
+# クラスの長さ制限を緩和
+Metrics/ClassLength:
+  Max: 150
+
+# ブロックの長さ制限を緩和
+Metrics/BlockLength:
+  Max: 25
+  Exclude:
+    - 'spec/**/*'
+    - 'config/routes.rb'
+    - 'db/seeds.rb'
+
+# 文字列リテラルスタイル（シングルクォート推奨）
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+# ハッシュスタイル（新記法推奨）
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+# ドキュメント不要（個人プロジェクトのため）
+Style/Documentation:
+  Enabled: false
+
+# クラス変数の使用許可
+Style/ClassVars:
+  Enabled: false
+
+# 日本語コメント許可
+Style/AsciiComments:
+  Enabled: false
+
+# Rails特有の設定
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+# RSpec特有の設定
+RSpec/ExampleLength:
+  Max: 10
+
+RSpec/MultipleExpectations:
+  Max: 5
+
+RSpec/DescribeClass:
+  Enabled: false

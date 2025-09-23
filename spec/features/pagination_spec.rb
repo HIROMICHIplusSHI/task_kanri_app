@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ページネーション機能", type: :feature do
+RSpec.feature "ページネーション機能" do
   let(:user) { create(:user) }
 
   before do

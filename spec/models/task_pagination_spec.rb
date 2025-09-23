@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "タスクページネーション", type: :model do
+RSpec.describe "タスクページネーション" do
   let(:user) { create(:user) }
 
   describe "will_paginate integration" do

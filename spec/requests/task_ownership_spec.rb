@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Task Ownership", type: :request do
+RSpec.describe "Task Ownership" do
   let(:user1) { create(:user, email: "user1@example.com") }
   let(:user2) { create(:user, email: "user2@example.com") }
   let(:user1_task) { create(:task, user: user1) }

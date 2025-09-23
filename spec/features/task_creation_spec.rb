@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Task Creation", type: :feature do
+RSpec.feature "Task Creation" do
   scenario "user can create a new task successfully" do
     # Given: ログインユーザーが存在する
     user = create(:user)

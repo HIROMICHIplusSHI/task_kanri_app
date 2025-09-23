@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "UIデザイン改善", type: :feature do
+RSpec.feature "UIデザイン改善" do
   let(:user) { create(:user) }
 
   before do

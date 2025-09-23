@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
+RSpec.describe UsersController do
   describe "GET #new" do
     context "ログインしていない場合" do
       it "新規登録ページが表示されること" do

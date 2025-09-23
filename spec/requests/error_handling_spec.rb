@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Error Handling", type: :request do
+RSpec.describe "Error Handling" do
   let(:user) { create(:user) }
 
   before do

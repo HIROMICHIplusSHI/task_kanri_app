@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'rails_helper'
 
-RSpec.describe "UserDetailEnhancement", type: :feature do
+RSpec.describe "UserDetailEnhancement" do
   let(:user) { User.create!(name: "テストユーザー", email: "test@example.com",
                             password: "password", password_confirmation: "password") }
   let(:admin_user) { User.create!(name: "管理者", email: "admin@example.com",

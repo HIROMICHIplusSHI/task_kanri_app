@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'rails_helper'
 
-RSpec.describe SessionsHelper, type: :helper do
+RSpec.describe SessionsHelper do
   let(:admin_user) { User.create!(name: "管理者", email: "admin@example.com",
                                   password: "password", password_confirmation: "password", admin: true) }
   let(:regular_user) { User.create!(name: "一般ユーザー", email: "user@example.com",

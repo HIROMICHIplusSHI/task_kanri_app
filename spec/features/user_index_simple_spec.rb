@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'rails_helper'
 
-RSpec.describe "UserIndex Simple", type: :feature do
+RSpec.describe "UserIndex Simple" do
   let(:admin_user) { create(:user, admin: true) }
   let(:regular_user) { create(:user) }
 

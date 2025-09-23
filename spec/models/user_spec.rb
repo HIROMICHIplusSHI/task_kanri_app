@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   let(:user) { User.new(name: "テストユーザー", email: "test@example.com",
                         password: "password", password_confirmation: "password") }
 

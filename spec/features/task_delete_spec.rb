@@ -21,7 +21,7 @@ RSpec.describe "Task Deletion", type: :request do
   end
 end
 
-RSpec.feature "Task Deletion UI", type: :feature do
+RSpec.feature "Task Deletion UI" do
 
   scenario "task count decreases after deletion" do
     # Given: 複数のタスクが存在する

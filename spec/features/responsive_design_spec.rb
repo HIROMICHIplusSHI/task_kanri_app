@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "レスポンシブデザイン", type: :feature do
+RSpec.feature "レスポンシブデザイン" do
   let(:user) { create(:user) }
 
   before do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Task Validation", type: :feature do
+RSpec.feature "Task Validation" do
   scenario "user sees improved validation errors when creating task with missing fields" do
     # Given: タスク作成ページにアクセス
     visit new_task_path

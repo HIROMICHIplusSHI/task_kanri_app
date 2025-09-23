@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Task Edit", type: :feature do
+RSpec.feature "Task Edit" do
   scenario "user can edit an existing task successfully" do
     # Given: 既存のタスクが存在する
     user = create(:user)

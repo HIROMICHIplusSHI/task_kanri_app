@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "User Login", type: :feature do
+RSpec.feature "User Login" do
   scenario "user can log in with valid credentials" do
     # Given: ユーザーが存在する
     user = create(:user)

@@ -93,7 +93,8 @@ if ENV['LARGE_DATASET'] == 'true'
   end
 
   # 他のユーザーには1-10タスクをランダム生成
-  other_users = User.where.not(email: ["seisaku@email.com", "user1@example.com", "user2@example.com", "sample@email.com"])
+  other_users = User.where.not(email: ["seisaku@email.com", "user1@example.com", "user2@example.com",
+                                       "sample@email.com"])
 
   puts "  その他のユーザーにランダムタスクを生成中..."
 

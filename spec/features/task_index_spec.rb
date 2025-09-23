@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Task Index", type: :feature do
+RSpec.feature "Task Index" do
   scenario "user can view their tasks on index page" do
     # Given: ログインユーザーとそのタスクが存在する
     user = create(:user)
